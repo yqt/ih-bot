@@ -14,7 +14,7 @@ node index.js
 
 ## by friend message
 
-* admin required if set in config *
+*admin required if set in config*
 
 - `!create_lobby`: create a default private lobby
 - `!destroy_lobby`: destroy current lobby
