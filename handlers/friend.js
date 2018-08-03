@@ -3,7 +3,8 @@ var util = require("util"),
     dota2 = require("dota2"),
     dota2Client = global.dota2Client;
 
-var cmdCreateLobby = '!create_lobby';
+var cmdCreateLobby = '!create_lobby',
+    cmdDestroyLobby = '!destroy_lobby';
 
 function strip(str) {
     return str.replace(/^\s+|\s+$/g, "");
@@ -39,6 +40,21 @@ function createLobby(properties) {
     // });
 }
 
+function destroyLobby() {
+    setTimeout(function(){
+        dota2Client.destroyLobby(function(err, data){
+            if (err) {
+                util.log(err + ' - ' + JSON.stringify(data));
+            } else {
+                if(global.localData.lobbyChannel) {
+                    dota2Client.leaveChat(global.localData.lobbyChannel);
+                    global.localData.lobbyChannel = null;
+                }
+            }
+        });
+    }, 200);
+}
+
 function friendMessageHandler(steamId, message, chatEntryType) {
     if (global.config.admin_steam_id && steamId != global.config.admin_steam_id) {
         return;
@@ -52,6 +68,9 @@ function friendMessageHandler(steamId, message, chatEntryType) {
     switch (message) {
         case cmdCreateLobby:
             createLobby();
+            break;
+        case cmdDestroyLobby:
+            destroyLobby();
             break;
         default:
             util.log("unknow cmd[" + message + "]");

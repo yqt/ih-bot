@@ -65,7 +65,7 @@ var onSteamLogOn = function onSteamLogOn(logonResp) {
                     dota2Client.leavePracticeLobby(function(err, data){
                         if (!err) {
                             dota2Client.abandonCurrentGame();
-                            if(lobbyChannel) dota2Client.leaveChat(lobbyChannel);
+                            if(global.localData.lobbyChannel) dota2Client.leaveChat(global.localData.lobbyChannel);
                         } else {
                             util.log(err + ' - ' + JSON.stringify(data));
                         }
@@ -79,7 +79,7 @@ var onSteamLogOn = function onSteamLogOn(logonResp) {
                         if (err) {
                             util.log(err + ' - ' + JSON.stringify(data));
                         } else {
-                            if(lobbyChannel) dota2Client.leaveChat(lobbyChannel);
+                            if(global.localData.lobbyChannel) dota2Client.leaveChat(global.localData.lobbyChannel);
                         }
                     });
                 }, 10000);
@@ -116,6 +116,7 @@ var onSteamLogOn = function onSteamLogOn(logonResp) {
             global.localData.lobby = lobby;
             dota2Client.practiceLobbyKickFromTeam(dota2Client.AccountID);
             lobbyChannel = "Lobby_"+lobby.lobby_id;
+            global.localData.lobbyChannel = lobbyChannel;
             dota2Client.joinChat(lobbyChannel, dota2.schema.lookupEnum('DOTAChatChannelType_t').values.DOTAChannelType_Lobby);
         });
 
