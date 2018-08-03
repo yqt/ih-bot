@@ -16,7 +16,6 @@ if (global.config.steam_servers && global.config.steam_servers != []) {
 }
 
 var handlers = require("./handlers");
-console.log(handlers);
 
 var onSteamLogOn = function onSteamLogOn(logonResp) {
     if (logonResp.eresult == steam.EResult.OK) {
