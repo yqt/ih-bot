@@ -1,5 +1,6 @@
 var util = require("util"),
-    data2 = require("dota2"),
+    steam = require("steam"),
+    dota2 = require("dota2"),
     dota2Client = global.dota2Client;
 
 var cmdCreateLobby = '!create_lobby';
@@ -39,7 +40,7 @@ function createLobby(properties) {
 }
 
 function friendMessageHandler(steamId, message, chatEntryType) {
-    if (global.config.admin_steam_id && steamId !+ global.config.admin_steam_id) {
+    if (global.config.admin_steam_id && steamId != global.config.admin_steam_id) {
         return;
     }
 

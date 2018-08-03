@@ -2,13 +2,11 @@ var steam = require("steam"),
     util = require("util"),
     fs = require("fs"),
     crypto = require("crypto"),
-    handlers = require("handlers"),
     dota2 = require("dota2"),
     steamClient = new steam.SteamClient(),
     steamUser = new steam.SteamUser(steamClient),
     steamFriends = new steam.SteamFriends(steamClient),
-    dota2Client = new dota2.Dota2Client(steamClient, true),
-    handlers = require("./handlers");
+    dota2Client = new dota2.Dota2Client(steamClient, true);
 
 global.config = require("./config");
 global.dota2Client = dota2Client;
@@ -16,6 +14,9 @@ global.localData = {};
 if (global.config.steam_servers && global.config.steam_servers != []) {
     steam.servers = global.config.steam_servers;
 }
+
+var handlers = require("./handlers");
+console.log(handlers);
 
 var onSteamLogOn = function onSteamLogOn(logonResp) {
     if (logonResp.eresult == steam.EResult.OK) {

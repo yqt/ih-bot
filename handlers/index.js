@@ -1,7 +1,7 @@
 var chat = require("./chat"),
-    friend = require("./friend"),
+    friend = require("./friend");
 
-exports = {
+module.exports = {
     chat: chat,
-    friend: friend,
+    friend: friend
 }

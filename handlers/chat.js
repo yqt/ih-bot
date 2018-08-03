@@ -1,6 +1,5 @@
 var util = require("util"),
-    dota2Client = global.dota2Client,
-    lobby = global.localData.lobby;
+    dota2Client = global.dota2Client;
 
 var cmdStart = '!start';
 
@@ -9,7 +8,8 @@ function strip(str) {
 }
 
 function chatMessageHandler(channel, personaName, message) {
-    if (channel != "Lobby_" + lobby.lobby_id) {
+    lobby = global.localData.lobby;
+    if (!lobby || channel != "Lobby_" + lobby.lobby_id) {
         return;
     }
     util.log("[" + channel + "] " + personaName + ": " + message);
